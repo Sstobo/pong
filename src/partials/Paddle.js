@@ -10,8 +10,6 @@ export default class Paddle {
     this.speed = 10;
     this.score = 0;
 
-
-// controls
 // up and down are KEYS passed in as last two args, up/down are arg names, KEYS.a,b are variables passed in
     document.addEventListener('keydown', event => {
         switch(event.key) {
@@ -36,7 +34,7 @@ export default class Paddle {
 
   up() {
 // get max # either 0 or y - speed  max is this.y
-// if 0 is highest (eg paddle is at y9, moves 10, would be -1, therefore 0 is highest and movement is blocked)
+  // if 0 is highest (eg paddle is at y9, moves 10, would be -1, therefore 0 is highest and             movement is blocked)
     this.y = Math.max(0, this.y - this.speed) 
   }
 // same principle but for high nunbers, looking for lowest, not allowing y to equal more than this.boardHeight

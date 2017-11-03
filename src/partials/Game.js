@@ -2,6 +2,7 @@ import {SVG_NS, KEYS} from '../settings';
 import Board from './Board';
 import Paddle from './Paddle';
 import Ball from './Ball';
+import Score from './Score';
 export default class Game {
 
 	constructor(element, width, height) {
@@ -18,16 +19,12 @@ export default class Game {
 
 // instance a board
 		this.board = new Board(this.width, this.height);
-		
+// Score board		
+		this.score1 = new Score(10, 30, 30);
+		this.score2 = new Score(270, 30, 30);
 // ball instantiator
 		this.radius = 10;
-		this.ball = new Ball(this.radius,this.width, this.height )
-		// this.ball1 = new Ball(this.radius,this.width, this.height )
-		// this.ball2= new Ball(4,this.width, 100 )
-		// this.ball3 = new Ball(30,200, this.height )
-		// this.ball4 = new Ball(11,this.width, this.height )
-		// this.ball5 = new Ball(9,this.width, this.height )
-
+		this.ball = new Ball(this.radius,this.width, this.height);
 // set some variables for the paddles
 		this.boardGap = 10;
 		this.paddleHeight = 56;
@@ -77,11 +74,12 @@ export default class Game {
 // select game namespace and append div
 		this.gameElement.appendChild(svg);
 // draw actors
+		
 		this.board.render(svg);
 		this.paddle1.render(svg);
 		this.paddle2.render(svg);
 		this.ball.render(svg, this.paddle1, this.paddle2);
-
-
-	}
+		this.score1.render(svg, this.paddle1.score);	
+		this.score2.render(svg, this.paddle2.score);	
+			}
 }

@@ -1,5 +1,6 @@
 import {SVG_NS} from '../settings';
 export default class Ball {
+  
 // ball constructor
   constructor(radius, boardWidth, boardHeight) {
     this.radius = radius;
@@ -22,21 +23,28 @@ export default class Ball {
 // random vector creator for x
     this.vx = this.direction * (6 - Math.abs(this.vy));
   }
-
+ 
 // wall collision
-    wallCollision() {
+
+    wallCollision(paddle1, paddle2) {
       const hitLeft = this.x - this.radius <= 0;
       const hitRight = this.x + this.radius >= this.boardWidth;
       const hitTop = this.y - this.radius <= 0;
       const hitBottom = this.y + this.radius >= this.boardHeight;
     
-      if ( hitLeft || hitRight ) {
-        this.vx = -this.vx;
-
-      } else if ( hitTop || hitBottom ) {
-        this.vy = -this.vy;
+      if ( hitLeft ) {
+        this.direction = -1;
+        this.goal(paddle2);         
+      }
+      else if (hitRight) { 
+        this.direction = 1;
+        this.goal(paddle1);   
+      }  
+      else if ( hitTop || hitBottom ) {
+        this.vy = -this.vy;        
       }
     }
+    
 // paddle collision, pulled from paddle  if ball is moving right 
   paddleCollision(paddle1, paddle2) {
       if (this.vx > 0) {
@@ -51,7 +59,7 @@ export default class Ball {
               && this.y >= topY 
               && this.y <= bottomY
               // ball y is >= topY and ball y <= bottomY
-          ) { this.vx = -this.vx; }
+          ) { this.vx = -this.vx;}
 
       } else {
         // set coordinates if ball is moving left
@@ -67,8 +75,11 @@ export default class Ball {
         ) { this.vx = -this.vx; }   
       }
     }
-
-
+// Goal function    
+    goal(player) {
+      player.score++;
+      this.reset(); 
+    }
 
 
 // args from render call in game js
@@ -78,7 +89,7 @@ export default class Ball {
     this.x = this.x + this.vx;
 
     // wall collision render 
-    this.wallCollision();
+    this.wallCollision(paddle1, paddle2);
     this.paddleCollision(paddle1, paddle2);
 
 // draw the ball
