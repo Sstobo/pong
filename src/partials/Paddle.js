@@ -21,24 +21,30 @@ export default class Paddle {
           case down: 
             this.down()
             break;
-        }
-    
+        }   
     });
   }
+// returns array of paddle info
+  coordinates(x, y, width, height) {
+    let leftX = x;
+    let rightX = x + width;
+    let topY = y;
+    let bottomY = y + height;
+    return [leftX, rightX, topY, bottomY];
+  }
+
 
   up() {
 // get max # either 0 or y - speed  max is this.y
 // if 0 is highest (eg paddle is at y9, moves 10, would be -1, therefore 0 is highest and movement is blocked)
-    this.y = Math.max(0, this.y - this.speed)
-   
+    this.y = Math.max(0, this.y - this.speed) 
   }
 // same principle but for high nunbers, looking for lowest, not allowing y to equal more than this.boardHeight
   down(){
     this.y = Math.min(this.boardHeight - this.height, this.y + this.speed)
   }
 
-
-
+// paddle render
   render(svg) {
     let paddle = document.createElementNS(SVG_NS, 'rect');
     paddle.setAttributeNS(null, 'width', this.width);
