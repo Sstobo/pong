@@ -9,6 +9,6 @@ const game = new Game('game', 512, 256);
 
 (function gameLoop() {
     game.render();
-    // sets loop to browser refresh rate
+    // // sets loop to browser refresh rate
     requestAnimationFrame(gameLoop);
 })();
