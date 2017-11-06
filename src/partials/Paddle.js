@@ -20,7 +20,7 @@ export default class Paddle {
             this.down()
             break;
         }   
-    });
+    }); 
   }
 // returns array of paddle info
   coordinates(x, y, width, height) {
@@ -31,9 +31,7 @@ export default class Paddle {
     return [leftX, rightX, topY, bottomY];
   }
 
-
   up() {
-// get max # either 0 or y - speed  max is this.y
   // if 0 is highest (eg paddle is at y9, moves 10, would be -1, therefore 0 is highest and             movement is blocked)
     this.y = Math.max(0, this.y - this.speed) 
   }
@@ -49,12 +47,9 @@ export default class Paddle {
     paddle.setAttributeNS(null, 'height', this.height);
     paddle.setAttributeNS(null, 'x', this.x);
     paddle.setAttributeNS(null, 'y', this.y);
-    // paddle.setAttributeNS(null, 'speed', this.speed);
-    // paddle.setAttributeNS(null, 'score', this.score);
     paddle.setAttributeNS(null, 'stroke', 'black');
     paddle.setAttributeNS(null, 'fill', 'white');
-
     svg.appendChild(paddle);
 }
 }
-
+  

@@ -8,6 +8,9 @@ export default class Ball {
     this.boardHeight = boardHeight;
     this.direction = 1;
     this.reset();
+    this.ping = new Audio('public/sounds/drum1.wav');
+    this.ping1 = new Audio('public/sounds/drum2.wav');
+    this.ping4 = new Audio('public/sounds/cheer.wav');
   }
 // ball reset
   reset() {
@@ -17,15 +20,14 @@ export default class Ball {
 // bug fix - make sure vy is not 0
     this.vy = 0;
     while (this.vy === 0) {
-      this.vy = Math.floor(Math.random() * 10 - 5);
+    this.vy = Math.floor(Math.random() * 10 - 5);
     }
 
 // random vector creator for x
     this.vx = this.direction * (6 - Math.abs(this.vy));
   }
- 
-// wall collision
 
+// wall collision
     wallCollision(paddle1, paddle2) {
       const hitLeft = this.x - this.radius <= 0;
       const hitRight = this.x + this.radius >= this.boardWidth;
@@ -41,6 +43,7 @@ export default class Ball {
         this.goal(paddle1);   
       }  
       else if ( hitTop || hitBottom ) {
+        this.ping1.play();
         this.vy = -this.vy;        
       }
     }
@@ -54,12 +57,15 @@ export default class Ball {
           let [leftX, rightX, topY, bottomY] = player;
         // if to check if ball hits right left edge
           if (
-            // right edge of ball    >= left edge of paddle direction -
+         // right edge of ball    >= left edge of paddle direction -
               this.x + this.radius >= leftX 
               && this.y >= topY 
               && this.y <= bottomY
               // ball y is >= topY and ball y <= bottomY
-          ) { this.vx = -this.vx;}
+          ) { 
+            this.vx = -this.vx;
+            this.ping.play();
+          }
 
       } else {
         // set coordinates if ball is moving left
@@ -72,16 +78,19 @@ export default class Ball {
             && this.y >= topY 
             && this.y <= bottomY
             // ball y is >= topY and ball y <= bottomY
-        ) { this.vx = -this.vx; }   
+        ) { this.vx = -this.vx;
+            this.ping.play(); }   
       }
     }
 // Goal function    
     goal(player) {
       player.score++;
+      if (player.score > 10 ){
+       player.score = 0;
+       this.ping4.play();
+      }
       this.reset(); 
     }
-
-
 // args from render call in game js
   render(svg, paddle1, paddle2) {
     //update rendering variable;
@@ -96,7 +105,7 @@ export default class Ball {
     let ball = document.createElementNS(SVG_NS, 'circle');
     ball.setAttributeNS(null, 'r', this.radius );
     ball.setAttributeNS(null, 'fill', 'white');
-    ball.setAttributeNS(null, "stroke", "black");
+    ball.setAttributeNS(null, 'stroke', 'black');
     ball.setAttributeNS(null, 'cx', this.x );
     ball.setAttributeNS(null, 'cy', this.y);
     svg.appendChild(ball);
