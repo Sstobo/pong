@@ -27,6 +27,12 @@ A basic pong game using SVGs.
 * ▼: down
 # pong
 
+**Learnings**
+This was a challenging project! At first I had a tough time keeping up with where all the variables were coming from. I spent some time commenting and tracing them back to thier source, and this helped a lot. Overall tons of fun, JS is slowly coming together.
+
+
+
+
 **Stretch goal info**
 I have added a method to the goal function that plays celebratory crowd noises when a score of 10 is exceeded. It also resets that players score to 0.
 
