@@ -39,7 +39,6 @@ export default class Paddle {
   down(){
     this.y = Math.min(this.boardHeight - this.height, this.y + this.speed)
   }
-
 // paddle render
   render(svg) {
     let paddle = document.createElementNS(SVG_NS, 'rect');

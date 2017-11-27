@@ -32,9 +32,8 @@ This was a challenging project! At first I had a tough time keeping up with wher
 
 
 
-
 **Stretch goal info**
 I have added a method to the goal function that plays celebratory crowd noises when a score of 10 is exceeded. It also resets that players score to 0.
 
-Mutliball -
+Multiball -
 On either player surpassing a score of 4 or 7, an extra ball is instantiated. Ball size varies. This is done with an if statement in the main game loop, as well as two extra balls being constructed but not rendered until the appropriate conditions are met.
