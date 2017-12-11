@@ -28,9 +28,11 @@ A basic pong game using SVGs.
 # pong
 
 **Learnings**
-This was a challenging project! At first I had a tough time keeping up with where all the variables were coming from. I spent some time commenting and tracing them back to thier source, and this helped a lot. Overall tons of fun, JS is slowly coming together.
+This project required a lot of research and variable tracking, which initially created some confusion in me. At first I had a tough time keeping up with where all the variables were coming from. What I found, was that by very carefully tracking the variables throughout the code, I was able to begin building a comprehensive understanding of the project. 
 
+This is a technique that I have since applied to every project, and will continue to use in the future.
 
+Another factor that was a bit of a revelation, was the limitted ammount of hard coded variables. Much of the content is generated with the board height and width variables. By following this protocol, one can have multiple variables remain in proportion to each other despite changes and re-sizing.
 
 **Stretch goal info**
 I have added a method to the goal function that plays celebratory crowd noises when a score of 10 is exceeded. It also resets that players score to 0.
